@@ -6,15 +6,17 @@ function Homepage() {
 
     const [data, setData] = useState(null)
     const [hasChanged, setHasChanged] = useState(false)
-    const [reportSuite, setReportSuite] = useState("")
+    const [originAirport, setOriginAirport] = useState("")
+    const [destinationAirport, setDestinationAirport] = useState("")
 
     // Get result from test 
     async function callBackendAPI() {
 
         // Body of the request
         try {
-            console.log("report suite entered:", reportSuite)
-            const response = await axios.post("/getData", {reportSuite: reportSuite})
+            const searchInfo = {originAirport: originAirport, destinationAirport: destinationAirport}
+            console.log("report search info:", searchInfo)
+            const response = await axios.post("/getData", searchInfo)
 
             const success = response.data.success
             
@@ -33,13 +35,18 @@ function Homepage() {
     }
     
 
-    // Update report suite name when entered
-    function onChangeReportSuite(e) {
-        setReportSuite(e.target.value)
+    // Update origin airport when selected
+    function onChangeOrigin(e) {
+        setOriginAirport(e.target.value)
+    }
+
+    // Update destination airport when selected
+    function onChangeDestination(e) {
+        setDestinationAirport(e.target.value)
     }
 
     // Call function when button is clicked on
-    function onRunTest(e) {
+    function onSearch(e) {
         e.preventDefault()
         callBackendAPI()
     }
@@ -49,27 +56,37 @@ function Homepage() {
            <div className="homepage-container">
 
                <div className="homepage-title">
-               <h2>Display Results of Omega QA Tests</h2>
+               <h2>Search a Flight</h2>
                </div>
                <div className="homepage-body">
                  
                   <form>
                     <div className="homepage-body-item1">
                        <div>
-                       <label>Report Suite &nbsp;</label>
-                        <input 
-                          type="text"
-                          value={reportSuite}
-                          onChange={onChangeReportSuite}
-                          placeholder="Enter the report suite name"
-                          size="40"
-                        />
+                            <label>Origin Airport &nbsp;</label>
+                            <input 
+                            type="text"
+                            value={originAirport}
+                            onChange={onChangeOrigin}
+                            placeholder="Flying from"
+                            size="40"
+                            />
+                       </div>
+                       <div>
+                            <label>Destination Airport &nbsp;</label>
+                            <input 
+                            type="text"
+                            value={originAirport}
+                            onChange={onChangeDestination}
+                            placeholder="Flying to"
+                            size="40"
+                            />
                        </div>
                         <div>
                            <button
                              className="btn"
-                             onClick={onRunTest}
-                           >Run test</button>
+                             onClick={onSearch}
+                           >search</button>
                         </div>
                     </div>
                   </form>

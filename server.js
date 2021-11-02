@@ -17,15 +17,15 @@ app.use(express.urlencoded({
 app.post("/getData", (req, res) => {
     try {
         const {body}  = req
-        const {reportSuite} = body
+        const {searchInfo} = body
 
-        console.log("Request from browser", reportSuite )
+        console.log("Request from browser", searchInfo )
 
-        if (!reportSuite) {
-            return res.send({success: false, message: "Report suite name is invalid"})
+        if (!searchInfo) {
+            return res.send({success: false, message: "Search is invalid"})
         }
 
-        res.send({ value: {reportSuite: reportSuite}, success: true}); 
+        res.send({ value: {searchInfo: searchInfo}, success: true}); 
     } catch(e) {
         res.status(500).send({error: e})
     }

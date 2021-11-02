@@ -1,4 +1,4 @@
-# Flights & Weather
+# Flights & Weather Project
 This website leverages machine learning to predict future flights delays due to weather. 
 
 # Create .env file
