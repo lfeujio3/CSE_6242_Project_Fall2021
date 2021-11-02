@@ -2,6 +2,8 @@
 This website leverages machine learning to predict future flights delays due to weather. 
 
 # Create .env file
+
+Create a .env file and add all the required api keys
 ```bash
 touch .env
 ```
