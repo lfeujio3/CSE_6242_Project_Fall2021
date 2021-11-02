@@ -1,0 +1,21 @@
+
+.homepage-container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  margin: 2rem auto 0 auto;
+}
+
+.homepage-body {
+  display: flex;
+  position: relative;
+  padding: 2rem;
+}
+
+.homepage-body-item1 {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+}
