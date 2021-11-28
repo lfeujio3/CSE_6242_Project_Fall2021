@@ -2,7 +2,7 @@
   "name": "flights_and_weather_backend",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
@@ -18,13 +18,21 @@
     "@emotion/react": "^11.5.0",
     "@emotion/styled": "^11.3.0",
     "body-parser": "^1.19.0",
+    "clean-webpack-plugin": "^4.0.0",
     "concurrently": "^6.3.0",
     "dotenv": "^10.0.0",
+    "dotenv-webpack": "^7.0.3",
     "express": "^4.17.1",
+    "fs-extra": "^10.0.0",
+    "html-webpack-harddisk-plugin": "^2.0.0",
+    "html-webpack-plugin": "^5.5.0",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.13",
     "tedious": "^14.0.0",
-    "urllib": "^2.38.0"
+    "urllib": "^2.38.0",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.6.0"
   },
   "devDependencies": {
     "prettier": "^2.4.1"
