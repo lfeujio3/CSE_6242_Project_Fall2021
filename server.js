@@ -7,6 +7,8 @@ var axios = require('axios')
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
+const {api_key} =require("./config")
+
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
@@ -176,7 +178,7 @@ app.post("/delayPrediction", (req, res) => {
         url: 'http://b7d1ef00-818e-4ae7-91dc-f5b8da95bab9.eastus.azurecontainer.io/score',
         headers: { 
           'Content-Type': 'application/json', 
-          'Authorization': 'Bearer DtSOqFlkrNVgvl2qY40V8rjQJ1Xgbifz'
+          'Authorization': `Bearer ${api_key}`
         },
         data : JSON.stringify(data)
       };

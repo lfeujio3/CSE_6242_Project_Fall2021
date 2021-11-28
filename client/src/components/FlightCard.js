@@ -168,7 +168,7 @@ function FlightCard(props) {
     // Wait for 3s before making api call to get prediction
     setTimeout(() => {
       getPrediction()
-    }, 3000)
+    }, 2000)
   }
 
 
