@@ -9,11 +9,25 @@ import Homepage from "./components/Homepage"
 require("dotenv").config();
 
 function App(props) {
+
+  const [cardSelected, setCardSelected] = useState({})
+  const [predictionResult, setPredictionResult] = useState({})
+  const [isFlightSelected, setIsFlightSelected] = useState(false)
+  const [isPredAvailable, setIsPredAvailable] = useState(false)
+
+
   return (
     <>
       <ServiceContext.Provider
         value = {{
-          
+          cardSelected,
+          predictionResult,
+          isFlightSelected,
+          isPredAvailable,
+          setCardSelected,
+          setPredictionResult,
+          setIsFlightSelected,
+          setIsPredAvailable
         }}
       >
         <BrowserRouter>

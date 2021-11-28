@@ -8,6 +8,15 @@ Create a .env file and add all the required api keys
 touch .env
 ```
 
+# Set up node modules and dependencies
+
+```bash
+npm install
+cd client
+npm install
+
+```
+
 # Launch Website in Local Environment
 
 ```bash
