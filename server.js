@@ -2,18 +2,35 @@ const express = require('express');
 const bodyParser = require("body-parser")
 const app = express();
 var axios = require('axios')
+var mongoose = require('mongoose');
+const PredictionResults = require("./models/prediction.model");
 
 // Load the .env file if it exists
 require("dotenv").config();
 const port = process.env.PORT || 5000;
 
-const {api_key} =require("./config")
+const {api_key, mongo_conn_string} =require("./config")
 
 app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
 
+// Connect to mongoDB
+
+
+//Set up default mongoose connection
+var mongoDB = mongo_conn_string;
+mongoose.connect(mongoDB, {useNewUrlParser: true, useUnifiedTopology: true});
+
+//Get the default connection
+var db = mongoose.connection;
+
+//Bind connection to error event (to get notification of connection errors)
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once("open", () => {
+  console.log("MongoDB database connection established successfully");
+});
 
 // Connect to Azure blob storage
 const { BlobServiceClient, StorageSharedKeyCredential } = require("@azure/storage-blob");
@@ -188,6 +205,43 @@ app.post("/delayPrediction", (req, res) => {
             var result = response.data.Results.WebServiceOutput0[0]
             console.log(result);
             res.send({ value: result, success: true}); 
+
+            // Save Results to MongoDB
+            const newPrediction = new PredictionResults({
+              HourlyAltimeterSetting: result.HourlyAltimeterSetting,
+              HourlyDewPointTemperature: result.HourlyDewPointTemperature,
+              HourlyDryBulbTemperature: result.HourlyDryBulbTemperature,
+              HourlyPrecipitation: result.HourlyPrecipitation,
+              HourlyRelativeHumidity: result.HourlyRelativeHumidity,
+              HourlySeaLevelPressure: result.HourlySeaLevelPressure,
+              HourlyStationPressure: result.HourlyStationPressure,
+              HourlyVisibility: result.HourlyVisibility,
+              HourlyWetBulbTemperature: result.HourlyWetBulbTemperature,
+              HourlyWindDirection: result.HourlyWindDirection,
+              HourlyWindSpeed: result.HourlyWindSpeed,
+              Flight_date: result.Flight_date,
+              Flight_Number: result.Flight_Number,
+              Destination_Airport: result.Destination_Airport,
+              Scheduled_Dep_Time: result.Scheduled_Dep_Time,
+              Departure_delay: result.Departure_delay,
+              Delay_Ind: result.Delay_Ind,
+              Hour_Weather: result.Hour_Weather,
+              Hour_Scheduled_Flight: result.Hour_Scheduled_Flight,
+              Winter: result.Winter,
+              Spring: result.Spring,
+              Summer: result.Summer,
+              Fall: result.Fall,
+              Scored_Labels: result['Scored Labels'],
+              Scored_Probabilities: result["Scored Probabilities"]
+            });
+
+            // Save the new model instance, passing a callback
+            newPrediction.save(function (err) {
+              if (err) return handleError(err);
+              console.log("Prediction result saved!")
+            });
+
+
           })
           .catch(function (error) {
             console.log("error making call to azure web service: ",error);
@@ -198,6 +252,7 @@ app.post("/delayPrediction", (req, res) => {
       res.status(500).send({error: e})
   }
 })
+
 
 
 // This displays message that the server running and listening to specified port

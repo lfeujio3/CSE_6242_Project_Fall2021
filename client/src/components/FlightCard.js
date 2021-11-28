@@ -109,7 +109,7 @@ function FlightCard(props) {
                   'HourlyWetBulbTemperature': `${item.HourlyWetBulbTemperature}`,
                   'HourlyWindDirection': `${item.HourlyWindDirection}`,
                   'HourlyWindSpeed': `${item.HourlyWindSpeed}`,
-                  'Flight_date': `${item.Flight_date}`,
+                  'Flight_date': `${item.Flight_Date}`,
                   'Flight_Number': `${item.Flight_Number}`,
                   'Destination_Airport': `${item.Destination_Airport}`,
                   'Scheduled_Dep_Time':`${item.Scheduled_Dep_Time}`,
