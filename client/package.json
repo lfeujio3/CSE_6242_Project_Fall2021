@@ -39,7 +39,9 @@
     "eject": "react-scripts eject",
     "frontend": "npm run start",
     "backend": "cd .. && nodemon server.js",
-    "dev": "concurrently \"npm run backend\" \"npm run frontend\""
+    "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "build:deploy": "cross-env NODE_ENV=production webpack"
 
   },
   "eslintConfig": {
