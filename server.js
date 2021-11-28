@@ -5,6 +5,19 @@ var axios = require('axios')
 var mongoose = require('mongoose');
 const PredictionResults = require("./models/prediction.model");
 
+
+
+if (process.env.NODE_ENV === "production") {
+  //Express will serve up production assets
+  //like our main.js file, or main.css file !
+  const path = require("path");
+  app.use(express.static(path.join(__dirname, "client/build")));
+  //Express will serve up the index.html file
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+  });
+}
+
 // Load the .env file if it exists
 require("dotenv").config();
 const port = process.env.PORT || 5000;
