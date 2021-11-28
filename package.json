@@ -8,7 +8,9 @@
     "start": "nodemon server.js",
     "frontend": "cd client && npm run start",
     "server": "nodemon server.js",
-    "dev": "concurrently \"nodemon server.js\" \"npm run frontend\""
+    "dev": "concurrently \"nodemon server.js\" \"npm run frontend\"",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build",
+    "build:deploy": "cross-env NODE_ENV=production webpack"
   },
   "keywords": [],
   "author": "",
