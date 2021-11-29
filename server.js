@@ -29,7 +29,14 @@ app.use(express.urlencoded({
   extended: true
 }));
 
-// Connect to mongoDB
+// Proxy to fixie
+const request = require('request')
+const fixieRequest = request.defaults({'proxy': process.env.FIXIE_URL});
+
+var myUrl = ( process.env.NODE_ENV === "production") ? "https://flightdelayforecast.herokuapp.com" : "http://localhost:3000"
+fixieRequest(`${myUrl}`, (err, res, body) => {
+  console.log(`Got response from fixie: ${res.statusCode}`);
+});
 
 
 //Set up default mongoose connection

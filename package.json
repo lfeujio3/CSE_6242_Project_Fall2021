@@ -33,6 +33,7 @@
     "html-webpack-plugin": "^5.5.0",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.13",
+    "request": "^2.88.2",
     "tedious": "^14.0.0",
     "urllib": "^2.38.0"
   },
