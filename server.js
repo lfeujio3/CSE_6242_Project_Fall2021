@@ -205,7 +205,8 @@ app.post("/delayPrediction", (req, res) => {
 
       var config = {
         method: 'post',
-        url: 'http://b7d1ef00-818e-4ae7-91dc-f5b8da95bab9.eastus.azurecontainer.io/score',
+        // url: 'http://b7d1ef00-818e-4ae7-91dc-f5b8da95bab9.eastus.azurecontainer.io/score',
+        url: 'http://74569b26-8d92-4aa8-912b-5dca83c7aaa2.eastus.azurecontainer.io/score',
         headers: { 
           'Content-Type': 'application/json', 
           'Authorization': `Bearer ${api_key}`
