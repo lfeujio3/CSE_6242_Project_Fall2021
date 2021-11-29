@@ -57,6 +57,13 @@ body {
   height: auto;
 }
 
+@media (max-width: 600px) {
+  .dashboard-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+}
+
 /* Search box */
 .search-container {
   flex: 2;
@@ -91,6 +98,12 @@ body {
   flex-wrap: wrap;
   position: relative;
   justify-content: space-between;
+}
+
+@media (max-width: 980px) {
+  .css-1b9hq1 {
+    flex-wrap: wrap !important;
+  }
 }
 .search-body-errors {
   flex: 1;

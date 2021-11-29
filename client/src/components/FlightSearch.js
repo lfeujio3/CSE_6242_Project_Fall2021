@@ -38,6 +38,7 @@ function FlightSearch() {
   const [searchResults, setSearchResults] = useState([])
   const nonSelected = "flight-search-card-element-item1"
   const selected = "flight-search-card-element-item1-selected"
+  const [hasInfoMsg, setHasInfoMsg] = useState(true)
 
   // Data for destination airports
   const options = airports.map((option) => {
@@ -73,11 +74,13 @@ function FlightSearch() {
     setDate(newDate)
     console.log("orgin value: ", originAirport)
     console.log("destination value: ",destinationAirport)
+    setHasInfoMsg(true)
   }
 
   useEffect(() => {
     if (errorMsg) {
       setInputMissing(true)
+      setHasInfoMsg(false)
     }
   }, [errorMsg])
 
@@ -109,6 +112,7 @@ function FlightSearch() {
   // Get result from test 
   async function getSearchFlights() {
     setErrorMsg("")
+    setHasInfoMsg(false)
 
     // Check if inputs values are missing 
     if (!originAirport) {
@@ -233,6 +237,15 @@ function FlightSearch() {
                 </Button>
               </Box>
             </div>
+            {hasInfoMsg ? (
+              <div className="search-body-errors">
+                <Alert variant="outlined" severity="info">
+                  You can only search for flights in 2019. 
+                </Alert>
+              </div>
+                  ) : null
+            }
+
             {inputMissing ? (
               <div className="search-body-errors">
                   <Alert variant="outlined" severity="error">

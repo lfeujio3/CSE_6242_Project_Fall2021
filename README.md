@@ -1,5 +1,8 @@
 # Flights & Weather Project
 This website leverages machine learning to predict future flights delays due to weather. 
+Here is the UI url:
+`https://flightdelayforecast.herokuapp.com/`
+
 
 # Create .env file
 
