@@ -1,0 +1,63 @@
+---
+title: "Project_PCA"
+output: html_document
+---
+
+IMPORT DATA*********************************************************************************************************************
+
+Load the raw data into type dataframe:
+The fread function loads the data faster than read.csv or read_csv
+```{r}
+library(data.table)
+
+raw_data <- fread("FlightWeatherCuratedHistory.csv", header=FALSE, stringsAsFactors=FALSE)
+```
+
+DATA CLEANING********************************************************************************************************************
+
+Remove NA columns:
+```{r}
+data1 <- Filter(function(x)!all(is.na(x)), raw_data)
+```
+
+Check data type of each column:
+```{r}
+str(data1)
+```
+
+Change data type of columns:
+- should we use num or int type for number columns?
+```{r}
+library(dplyr)
+
+data1 <- subset(data1, select= -c(V53, V58))
+data2 <- transform(data1,
+                   V6 = as.POSIXct(V6, format="%H:%M"), #shows date (today) and time but we only need time
+                   V49 = as.numeric(V49),
+                   V50 = as.numeric(V50),
+                   V51 = as.numeric(V51),
+                   V52 = as.numeric(V52),
+                   V57 = as.numeric(V57),
+                   V59 = as.numeric(V59),
+                   V60 = as.numeric(V60),
+                   V62 = as.numeric(V62))
+```
+RAW DATA VISULIZATION************************************************************************************************************
+```{r}
+library(ggplot2)
+library(GGally)
+
+ggpairs(data2)
+```
+
+
+
+
+PRINCIPLE COMPONENT ANALYSIS*****************************************************************************************************
+
+
+```{r}
+final_df = 1
+data2.pca <- prcomp(data2, center=TRUE, scale.=TRUE)
+summary(data2.pca)
+```
