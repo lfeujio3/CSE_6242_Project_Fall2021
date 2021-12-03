@@ -101,7 +101,7 @@ function FlightCard(props) {
                   'HourlyAltimeterSetting': `${item.HourlyAltimeterSetting}`,
                   'HourlyDewPointTemperature': `${item.HourlyDewPointTemperature}`,
                   'HourlyDryBulbTemperature': `${item.HourlyDryBulbTemperature}`,
-                  'HourlyPrecipitation':`${item.HourlyPrecipitation}`,
+                  'HourlyPrecipitation':`${item.HourlyPrecipitation ? item.HourlyPrecipitation : 0}`,
                   'HourlyRelativeHumidity': `${item.HourlyRelativeHumidity}`,
                   'HourlySeaLevelPressure': `${item.HourlySeaLevelPressure}`,
                   'HourlyStationPressure': `${item.HourlyStationPressure}`,
